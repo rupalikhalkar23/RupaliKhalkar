@@ -41,7 +41,7 @@ This project is built with:
 git clone <YOUR_GIT_URL>
 
 # Navigate to the project directory
-cd my-inner-universe
+cd rupali-personal website
 
 # Install dependencies
 npm i
