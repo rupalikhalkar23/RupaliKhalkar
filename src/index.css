@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/caveat/400.css';
+@import '@fontsource/caveat/700.css';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+/* Dreamy Personal Universe Design System */
+
+@layer base {
+  :root {
+    /* Deep midnight canvas */
+    --background: 230 35% 7%;
+    --foreground: 45 20% 95%;
+
+    /* Cards with glassmorphism */
+    --card: 230 30% 12%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 230 30% 12%;
+    --popover-foreground: 45 20% 95%;
+
+    /* Soft violet primary */
+    --primary: 270 60% 70%;
+    --primary-foreground: 230 35% 7%;
+
+    /* Muted midnight */
+    --secondary: 230 25% 18%;
+    --secondary-foreground: 45 20% 90%;
+
+    --muted: 230 20% 20%;
+    --muted-foreground: 230 15% 60%;
+
+    /* Soft pink accent */
+    --accent: 330 70% 75%;
+    --accent-foreground: 230 35% 7%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 45 20% 95%;
+
+    --border: 230 20% 20%;
+    --input: 230 25% 18%;
+    --ring: 270 60% 70%;
+
+    --radius: 1rem;
+
+    /* Custom colors for the dreamy theme */
+    --aurora-purple: 270 60% 65%;
+    --aurora-pink: 330 70% 70%;
+    --aurora-blue: 220 80% 60%;
+    --starlight: 45 30% 90%;
+    --midnight-deep: 230 40% 5%;
+    --glass: 230 30% 15%;
+    --glass-border: 230 20% 25%;
+    
+    /* Gradients */
+    --gradient-aurora: linear-gradient(135deg, hsl(270 60% 65% / 0.3), hsl(330 70% 70% / 0.2), hsl(220 80% 60% / 0.3));
+    --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(270 60% 30% / 0.4) 0%, transparent 50%),
+                     radial-gradient(ellipse at 80% 50%, hsl(330 70% 40% / 0.2) 0%, transparent 40%),
+                     radial-gradient(ellipse at 20% 80%, hsl(220 80% 40% / 0.2) 0%, transparent 40%);
+    --gradient-glass: linear-gradient(135deg, hsl(230 30% 15% / 0.8), hsl(230 30% 12% / 0.6));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(270 60% 50% / 0.3);
+    --shadow-soft: 0 4px 30px hsl(230 40% 5% / 0.5);
+    --shadow-card: 0 8px 32px hsl(230 40% 5% / 0.4);
+
+    /* Fonts */
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-handwritten: 'Caveat', cursive;
+
+    --sidebar-background: 230 30% 10%;
+    --sidebar-foreground: 45 20% 90%;
+    --sidebar-primary: 270 60% 70%;
+    --sidebar-primary-foreground: 230 35% 7%;
+    --sidebar-accent: 230 25% 18%;
+    --sidebar-accent-foreground: 45 20% 90%;
+    --sidebar-border: 230 20% 20%;
+    --sidebar-ring: 270 60% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
+  }
+
+  /* Handwritten text style */
+  .font-handwritten {
+    font-family: var(--font-handwritten);
+  }
+
+  /* Glassmorphism card */
+  .glass-card {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Grain texture overlay */
+  .grain-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  /* Glow effect */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Aurora text gradient */
+  .text-aurora {
+    background: linear-gradient(135deg, hsl(var(--aurora-purple)), hsl(var(--aurora-pink)), hsl(var(--aurora-blue)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  /* Constellation line */
+  .constellation-line {
+    background: linear-gradient(90deg, transparent, hsl(var(--aurora-purple) / 0.5), transparent);
+  }
+
+  /* Selection styling */
+  ::selection {
+    background: hsl(var(--aurora-purple) / 0.4);
+    color: hsl(var(--foreground));
+  }
+}
